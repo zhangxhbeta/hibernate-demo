@@ -16,15 +16,9 @@ import static org.junit.Assert.assertSame;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class UniOneToManyTest {
+public class BidToManyTest {
   @Autowired
   private TestEntityManager entityManager;
-
-  @Autowired
-  private UserRepository userRepository;
-
-  @Autowired
-  JdbcTemplate jdbcTemplate;
 
   @Test
   public void testSaveBid() {
