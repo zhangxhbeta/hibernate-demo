@@ -36,6 +36,39 @@ public class UserRepositoryTest {
     }
 
     @Test
+    public void testMergeObject() {
+      User bob = new User("Bob", "2018-06-06");
+      bob.setId(0L);
+
+      bob = entityManager.merge(bob);
+      entityManager.flush();
+
+      assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "user"));
+
+
+      User wrongBob = new User("wrongBob", "2018-06-06");
+      wrongBob.setId(bob.getId());
+
+      wrongBob = entityManager.merge(wrongBob);
+      entityManager.flush();
+
+      assertEquals(1, JdbcTestUtils.countRowsInTable(jdbcTemplate, "user"));
+
+      assertEquals(wrongBob, bob);
+      assertEquals("wrongBob", bob.getName());
+    }
+
+    @Test
+    public void testSavePropertyTransint() {
+      User bob = new User("Bob", "2018-06-06");
+
+      bob = userRepository.saveAndFlush(bob);
+
+      assertNotNull(bob);
+
+    }
+
+    @Test
     public void testSave() {
 
       Thing phone = new Thing("Phone", "0.01");

@@ -17,7 +17,6 @@ public class User {
   @Column
   String birthDate;
 
-
   @OneToMany(
     cascade = CascadeType.ALL,
     orphanRemoval = true
