@@ -34,11 +34,19 @@ public class BidToManyTest {
       new PostComment("My third review")
     );
 
+    post.addComment(
+      new PostComment("1")
+    );
+
     post = entityManager.persistAndFlush(post);
+    entityManager.clear();
+
+    Post findedPost = entityManager.find(Post.class, post.getId());
 
     // Verify the PostComment's id is not null
-    assertEquals(3, post.getComments().size());
-    PostComment firstComment = post.getComments().get(0);
+    assertEquals(3, findedPost.getComments().size());
+
+    PostComment firstComment = findedPost.getComments().get(0);
     assertNotNull(firstComment.getPost());
 
     // Will read from cache

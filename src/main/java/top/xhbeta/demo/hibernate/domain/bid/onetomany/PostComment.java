@@ -15,6 +15,9 @@ public class PostComment {
   @JoinColumn(name = "post_id")
   private Post post;
 
+  public PostComment() {
+  }
+
   public PostComment(String review) {
     this.review = review;
   }

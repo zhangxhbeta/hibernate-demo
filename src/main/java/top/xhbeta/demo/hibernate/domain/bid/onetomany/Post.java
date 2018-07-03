@@ -1,5 +1,7 @@
 package top.xhbeta.demo.hibernate.domain.bid.onetomany;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Post {
     cascade = CascadeType.ALL,
     orphanRemoval = true
   )
+  @Where(clause = "review != '1'")
   private List<PostComment> comments = new ArrayList<>();
 
   public Long getId() {
